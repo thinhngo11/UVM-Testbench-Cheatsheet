@@ -21,11 +21,8 @@ class my_driver extends uvm_driver #(my_item);
       seq_item_port.get_next_item(req);
       repeat (req.delay) @(vif.clk);
       vif.reset = req.reset;
-      if (!req.reset) 
-        if (req.enable) begin
-          vif.enable = req.enable;
-          vif.d = req.d; 
-        end
+      vif.enable = req.enable;
+      vif.d = req.d; 
       seq_item_port.item_done();
     end
   endtask
